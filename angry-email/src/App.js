@@ -4,8 +4,26 @@ import React from 'react';
 function App() {
 
   const [showCCAndBCC, setShowCCAndBCC] = React.useState(false);
+  const [message, setMessage] = React.useState('');
 
   const toggle = () => setShowCCAndBCC(!showCCAndBCC);
+
+  const clear = () => {
+    setMessage('');
+  }
+
+  const discard = () => {
+    clear();
+  }
+
+  const send = () => {
+    clear();
+    alert('Email sent.');
+  }
+
+  const changeText = (event) => {
+    setMessage(event.target.value);
+  }
 
   return (
     <div className="App">
@@ -17,7 +35,7 @@ function App() {
           <div className="tile is-vertical is-10">
             <div className="tile Email-section">
               <span className="Email-header">
-                <label for="Email-to">To: </label>
+                <label htmlFor="Email-to">To: </label>
               </span>
               <span className="Email-message">
                 <input type="email" className="Email-to" size="50"></input>
@@ -30,14 +48,14 @@ function App() {
 
             <><div className="tile Email-section">
                 <span className="Email-header">
-                  <label for="Email-cc">CC: </label>
+                  <label htmlFor="Email-cc">CC: </label>
                 </span>
                 <span className="Email-message">
                   <input type="email" className="Email-cc" size="50"></input>
                 </span>
               </div><div className="tile Email-section">
                   <span className="Email-header">
-                    <label for="Email-bcc">BCC: </label>
+                    <label htmlFor="Email-bcc">BCC: </label>
                   </span>
                   <span className="Email-message">
                     <input type="email" className="Email-bcc" size="50"></input>
@@ -46,18 +64,18 @@ function App() {
             }
             <div className="tile Email-section">
               <span className="Email-header">
-                <label for="Email-body">Message</label>
+                <label htmlFor="Email-body">Message</label>
               </span>
               <span className="Email-message">
-                <textarea className="Email-body" cols="50" rows="4"></textarea>
+                <textarea className="Email-body" cols="50" rows="4" value={message} onChange={changeText}></textarea>
               </span>
             </div>
             <div className="tile Email-section">
               <span className="Email-discard-button">
-                <button>Discard</button>
+                <button onClick={discard}>Discard</button>
               </span>
               <span className="Email-send-button">
-                <button className="Email-send-button">Send</button>
+                <button className="Email-send-button" onClick={send}>Send</button>
               </span>
             </div>
           </div>
